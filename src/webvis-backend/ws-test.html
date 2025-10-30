@@ -1,0 +1,12 @@
+<!doctype html>
+<meta charset="utf-8" />
+<h1>WebSocket Test</h1>
+<pre id="out"></pre>
+<script>
+const out = document.getElementById('out');
+const ws = new WebSocket('ws://127.0.0.1:5051/ws/live');
+ws.onopen = () => out.textContent += 'Connected to WebSocket\\n';
+ws.onmessage = (e) => out.textContent += e.data + '\\n';
+ws.onerror = (err) => out.textContent += 'Error: ' + err.message + '\\n';
+</script>
+

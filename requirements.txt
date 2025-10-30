@@ -1,0 +1,23 @@
+# Core Python utilities
+numpy<2.4
+scipy>=1.11,<1.17
+
+# Imaging
+pillow>=10,<11
+
+# Camera | pin DepthAI to a range that exposes dai.node.* and Camera API used
+depthai>=2.21,<2.26
+depthai-sdk>=1.12,<1.16
+
+# Computer vision (includes ArUco via cv2.aruco)
+opencv-contrib-python-headless==4.10.0.84
+
+# Sensors (Pimoroni Enviro+ stack)
+enviroplus
+bme280
+ltr559
+st7735
+
+# Peripheries
+fonts==0.0.3
+font-roboto==0.0.1
