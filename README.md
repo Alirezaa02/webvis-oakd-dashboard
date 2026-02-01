@@ -6,7 +6,8 @@ This system streams live telemetry and computer vision results to a browser over
 
 🎥 Demo Video
 
-[![Watch the demo]([https://drive.google.com/drive/folders/1oNYpHxRfkSwBWmsYMtoZCQdEKQsBif0u?usp=drive_link](https://drive.google.com/drive/folders/1oNYpHxRfkSwBWmsYMtoZCQdEKQsBif0u?usp=drive_link))
+[![Watch the demo](demo-thumbnail.png)](https://drive.google.com/drive/folders/1oNYpHxRfkSwBWmsYMtoZCQdEKQsBif0u?usp=drive_link)
+
 
 What the demo shows
 
