@@ -1,57 +1,125 @@
-# uavlcd
+🚁 OAK-D Real-Time Monitoring Dashboard
 
-Minimal, Pi‑first Python app that drives the Enviro+ ST7735 LCD and cycles through sensor pages.  
-Small modules, single entrypoint, easy to run on boot.
+A full-stack web dashboard for real-time monitoring of UAV sensor data and AI vision detections using an OAK-D.
 
-## Project layout
+This system streams live telemetry and computer vision results to a browser over a local network, allowing users to monitor environmental conditions and visual detections in real time.
 
-```
+🎥 Demo Video
 
-uavlcd/
-├─ README.md
-├─ requirements.txt
-├─ .gitignore
-├─ src/
-│  └─ uavlcd/
-│     ├─ __init__.py
-│     ├─ main.py          # Entrypoint: config + start the app loop
-│     ├─ app.py           # While-true loop, mode switching, timing
-│     ├─ display.py       # ST7735 LCD wrapper (init + show)
-│     ├─ sensors.py       # BME280 / LTR559 / Enviro+ gas + CPU temp
-│     ├─ renderer.py      # Draw logic for graph + header text
-│     ├─ modes.py         # Variable list, units, thresholds, constants
-│     └─ logging_conf.py  # Logging format/level setup
-├─ system/
-│  └─ uavlcd.service
-└─ scripts/
-└─ install_service.sh  # Helper to copy/enable the systemd service
+[![Watch the demo](https://drive.google.com/file/d/1Shk9DKaL5Seb6bEysQ7rCs7M3wdIKclx/view?usp=drive_link, https://drive.google.com/file/d/16dYUVaxbnn_J1bH-4hHqbJYBe_oHGOXq/view?usp=drive_link, https://drive.google.com/file/d/1Iz8QMiUD9fljAguxExH5N1-8i5RD3Ic3/view?usp=drive_link)
 
-````
+What the demo shows
 
-### What each module does
+Real-time sensor data updating in dashboard charts
 
-- `main.py` — tiny entrypoint; sets up logging then runs `App`.
-- `app.py` — holds the main loop:
-  - reads proximity to page through modes,
-  - samples the active sensor,
-  - maintains a per‑mode history buffer,
-  - calls `renderer` to draw, then pushes to the LCD.
-- `display.py` — one small class around the ST7735 driver (width/height/show).
-- `sensors.py` — very thin wrappers over BME280, LTR559, and Enviro+ gas.
-- `renderer.py` — converts the rolling history into a coloured bar/line plot and renders the header text (value + unit).
-- `modes.py` — the list of pages (`temperature`, `pressure`, `humidity`, `light`, `oxidised`, `reduced`, `nh3`) and constants (page debounce, proximity threshold, CPU temp compensation factor).
-- `logging_conf.py` — centralised logging config so logs look the same everywhere.
+Live camera feed from the laptop device as a example
 
-## Development notes
+AI detection working in real time (tested using a human face)
 
-* Keep behaviour identical to the original all‑in‑one script; this structure only splits responsibilities.
-* If you add a new page, update:
+Smooth, dynamic updates without page refresh
 
-  * `VARIABLES` and `UNITS` in `modes.py`,
-  * the `_read_variable` selector in `app.py`.
-* For quick debugging, lower the loop delay in `app.py` or add extra `logging.debug` lines.
+📌 Overview
 
-## Requirements
+This project implements a real-time monitoring interface that visualizes data collected from onboard UAV sensors and AI vision systems.
 
-### Setup
-Activate your virtual environment (if using one), then run ./setup_enviroplus.sh. The script mounts all tertiary requirements, along with installing all modules in requirements.txt in the same folder. Will attempt to return a useful error if it encounters a problem.
+The dashboard displays:
+
+🌡 Temperature
+
+💧 Humidity
+
+🌬 Gas sensor readings
+
+📍 UAV coordinates (x, y, z)
+
+📷 Live camera feed
+
+🎯 AI detections (e.g., faces, markers, objects)
+
+All data updates dynamically and can be logged for later review.
+
+👥 Project Context
+
+Developed as part of a collaborative engineering project to build a real-time UAV sensor and vision monitoring platform.
+
+My role focused on the software system, including:
+
+Backend API development
+
+Sensor data processing and formatting
+
+Integration of AI detection outputs
+
+Frontend dashboard logic and visualization
+
+Enabling real-time communication between hardware and the web interface
+
+🏗 System Architecture
+4
+
+Data Flow:
+Sensors + OAK-D → Python Backend → API → React Frontend → Web Browser
+
+Backend
+
+Built using Flask
+Handles:
+
+Sensor data ingestion
+
+AI detection data
+
+REST API endpoints
+
+Data logging
+
+Frontend
+
+Built using React
+Displays:
+
+Live charts
+
+Sensor values
+
+Detection information
+
+System status
+
+🖥 Key Features
+
+✔ Real-time environmental sensor monitoring
+✔ Live AI vision detection feed
+✔ UAV position tracking
+✔ Dynamic dashboard updates
+✔ Historical data logging
+✔ Accessible over local network
+
+🛠 Tech Stack
+
+Layer	Technology
+Backend	 = Python, Flask
+
+Frontend =	React, JavaScript, HTML, CSS
+
+Vision =	OAK-D (DepthAI)
+
+Data =	Environmental sensors + AI detections
+
+Network = 	Local web server (LAN access)
+
+▶ How to Run
+
+1️⃣ Backend Setup
+pip install -r requirements.txt
+python app.py
+
+2️⃣ Frontend Setup
+npm install
+npm start
+
+3️⃣ Open Dashboard
+
+Go to:
+
+http://<your-local-ip>:3000
